@@ -34,5 +34,9 @@ public class TestServiceImpl implements TestService {
 
         testRepository.save(test);
 
+        log.info("test info");
+        log.debug("test debug");
+        log.error("test error");
+
     }
 }
