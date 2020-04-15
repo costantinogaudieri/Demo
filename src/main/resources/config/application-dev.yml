@@ -24,9 +24,6 @@ spring:
       enabled: false # we use gulp + BrowserSync for livereload
   jackson:
     serialization.indent_output: true
-        # ===================================================================
-        #  Oracle DB su AWS
-        # -----------------
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/demo

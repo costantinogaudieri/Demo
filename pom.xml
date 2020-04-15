@@ -17,16 +17,6 @@
 	<description>Demo project for Spring Boot</description>
 
 	<repositories>
-		<!--<repository>-->
-		<!--<id>maven.oracle.com</id>-->
-		<!--<name>oracle-maven-repo</name>-->
-		<!--<url>https://maven.oracle.com</url>-->
-		<!--<layout>default</layout>-->
-		<!--<releases>-->
-		<!--<enabled>true</enabled>-->
-		<!--<updatePolicy>always</updatePolicy>-->
-		<!--</releases>-->
-		<!--</repository>-->
 		<repository>
 			<id>local-maven-repo</id>
 			<url>file:///${project.basedir}/local-maven-repo</url>
@@ -627,7 +617,7 @@
 					<password>bkoffice</password>
 					<referenceUrl>hibernate:spring:it.demo.domain?dialect=org.hibernate.dialect.Oracle12cDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
 					<verbose>true</verbose>
-					<logging>error</logging>
+					<logging>debug</logging>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -668,33 +658,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--
-            <plugin>
-                    <groupId>com.alexnederlof</groupId>
-                    <artifactId>jasperreports-plugin</artifactId>
-                    <version>${jasperreports-plugin.version}</version>
-                    <executions>
-                            <execution>
-                                    <phase>process-sources</phase>
-                                    <goals>
-                                            <goal>jasper</goal>
-                                    </goals>
-                            </execution>
-                    </executions>
-                    <configuration>
-                            <sourceDirectory>src/main/resources/reports</sourceDirectory>
-                            <outputDirectory>${project.build.directory}/classes/reports</outputDirectory>
-                    </configuration>
-                    <dependencies>
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-                                    <artifactId>jasperreports</artifactId>
-                                    <version>6.4.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-            </plugin>
-            -->
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
@@ -772,40 +735,6 @@
 				<profile.swagger>,swagger</profile.swagger>
 			</properties>
 		</profile>
-		<!--<profile>-->
-		<!--<id>webpack</id>-->
-		<!--<build>-->
-		<!--<plugins>-->
-		<!--<plugin>-->
-		<!--<groupId>com.github.eirslett</groupId>-->
-		<!--<artifactId>frontend-maven-plugin</artifactId>-->
-		<!--<version>${frontend-maven-plugin.version}</version>-->
-		<!--<executions>-->
-		<!--<execution>-->
-		<!--<id>install node and yarn</id>-->
-		<!--<goals>-->
-		<!--<goal>install-node-and-yarn</goal>-->
-		<!--</goals>-->
-		<!--<configuration>-->
-		<!--<nodeVersion>${node.version}</nodeVersion>-->
-		<!--<yarnVersion>${yarn.version}</yarnVersion>-->
-		<!--</configuration>-->
-		<!--</execution>-->
-		<!--<execution>-->
-		<!--<id>webpack build dev</id>-->
-		<!--<goals>-->
-		<!--<goal>yarn</goal>-->
-		<!--</goals>-->
-		<!--<phase>generate-resources</phase>-->
-		<!--<configuration>-->
-		<!--<arguments>run webpack:build</arguments>-->
-		<!--</configuration>-->
-		<!--</execution>-->
-		<!--</executions>-->
-		<!--</plugin>-->
-		<!--</plugins>-->
-		<!--</build>-->
-		<!--</profile>-->
 		<profile>
 			<id>dev</id>
 			<activation>
@@ -822,14 +751,9 @@
 					<optional>true</optional>
 				</dependency>
 			</dependencies>
-			<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId> <configuration> <warSourceDirectory>target/www/</warSourceDirectory>
-            <webResources> <resource> <directory>src/main/webapp</directory> <includes>
-            <include>WEB-INF/**</include> </includes> </resource> </webResources> </configuration>
-            </plugin> </plugins> </build> -->
 			<properties>
 				<!-- log configuration -->
-				<logback.loglevel>ERROR</logback.loglevel>
+				<logback.loglevel>DEBUG</logback.loglevel>
 				<!-- default Spring profiles -->
 				<spring.profiles.active>dev${profile.swagger}${profile.no-liquibase}</spring.profiles.active>
 			</properties>
@@ -844,13 +768,6 @@
 			</dependencies>
 			<build>
 				<plugins>
-					<!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <configuration>
-                    <filesets> <fileset> <directory>target/www/</directory> </fileset> </filesets>
-                    </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId> <configuration> <warSourceDirectory>target/www/</warSourceDirectory>
-                    <webResources> <resource> <directory>src/main/webapp</directory> <includes>
-                    <include>WEB-INF/**</include> </includes> </resource> </webResources> </configuration>
-                    </plugin> -->
 					<plugin>
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-maven-plugin</artifactId>
@@ -865,23 +782,11 @@
 							</execution>
 						</executions>
 					</plugin>
-					<!-- <plugin> <groupId>com.github.eirslett</groupId> <artifactId>frontend-maven-plugin</artifactId>
-                    <version>${frontend-maven-plugin.version}</version> <executions> <execution>
-                    <id>install node and yarn</id> <goals> <goal>install-node-and-yarn</goal>
-                    </goals> <configuration> <nodeVersion>${node.version}</nodeVersion> <yarnVersion>${yarn.version}</yarnVersion>
-                    </configuration> </execution> <execution> <id>yarn install</id> <goals> <goal>yarn</goal>
-                    </goals> <configuration> <arguments>install</arguments> </configuration>
-                    </execution> <execution> <id>webpack build test</id> <goals> <goal>yarn</goal>
-                    </goals> <phase>test</phase> <configuration> <arguments>run webpack:test</arguments>
-                    </configuration> </execution> <execution> <id>webpack build prod</id> <goals>
-                    <goal>yarn</goal> </goals> <phase>generate-resources</phase> <configuration>
-                    <arguments>run webpack:prod</arguments> </configuration> </execution> </executions>
-                    </plugin> -->
 				</plugins>
 			</build>
 			<properties>
 				<!-- log configuration -->
-				<logback.loglevel>ERROR</logback.loglevel>
+				<logback.loglevel>DEBUG</logback.loglevel>
 				<!-- default Spring profiles -->
 				<spring.profiles.active>prod${profile.swagger}${profile.no-liquibase}</spring.profiles.active>
 			</properties>
@@ -916,147 +821,13 @@
 				</plugins>
 			</build>
 			<properties>
-				<system.target>c3bo</system.target>
+				<system.target>demo</system.target>
 				<!-- log configuration -->
-				<logback.loglevel>ERROR</logback.loglevel>
+				<logback.loglevel>DEBUG</logback.loglevel>
 				<!-- default Spring profiles -->
 				<spring.profiles.active>test${profile.swagger}${profile.no-liquibase}</spring.profiles.active>
 			</properties>
 		</profile>
-
-		<!--<profile>-->
-		<!--&lt;!&ndash; Profile for doing "continuous compilation" with the Scala Maven plugin.-->
-		<!--It allows automatic compilation of Java classes as soon as they are saved.-->
-		<!--To use it, run in 3 terminals: - './mvnw -Pcc scala:cc' for continuous compilation-->
-		<!--of your classes - './mvnw -Pcc' for hot reload of Spring boot - 'npm start/yarn-->
-		<!--start' for hot reload of the HTML/JavaScript asset Everything should hot-->
-		<!--reload automatically! &ndash;&gt;-->
-		<!--<id>cc</id>-->
-		<!--<dependencies>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-starter-undertow</artifactId>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-devtools</artifactId>-->
-		<!--<optional>true</optional>-->
-		<!--</dependency>-->
-		<!--</dependencies>-->
-		<!--<build>-->
-		<!--<plugins>-->
-		<!--<plugin>-->
-		<!--<groupId>org.apache.maven.plugins</groupId>-->
-		<!--<artifactId>maven-war-plugin</artifactId>-->
-		<!--<configuration>-->
-		<!--<warSourceDirectory>src/main/webapp/</warSourceDirectory>-->
-		<!--</configuration>-->
-		<!--</plugin>-->
-		<!--<plugin>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-		<!--<configuration>-->
-		<!--<executable>true</executable>-->
-		<!--<fork>true</fork>-->
-		<!--<addResources>true</addResources>-->
-		<!--&lt;!&ndash; Enable the line below to have remote debugging of your application-->
-		<!--on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> &ndash;&gt;-->
-		<!--</configuration>-->
-		<!--</plugin>-->
-		<!--<plugin>-->
-		<!--<groupId>org.apache.maven.plugins</groupId>-->
-		<!--<artifactId>maven-compiler-plugin</artifactId>-->
-		<!--<executions>-->
-		<!--<execution>-->
-		<!--<id>default-compile</id>-->
-		<!--<phase>none</phase>-->
-		<!--</execution>-->
-		<!--<execution>-->
-		<!--<id>default-testCompile</id>-->
-		<!--<phase>none</phase>-->
-		<!--</execution>-->
-		<!--</executions>-->
-		<!--</plugin>-->
-		<!--<plugin>-->
-		<!--<groupId>net.alchim31.maven</groupId>-->
-		<!--<artifactId>scala-maven-plugin</artifactId>-->
-		<!--<version>${scala-maven-plugin.version}</version>-->
-		<!--<executions>-->
-		<!--<execution>-->
-		<!--<id>compile</id>-->
-		<!--<phase>compile</phase>-->
-		<!--<goals>-->
-		<!--<goal>add-source</goal>-->
-		<!--<goal>compile</goal>-->
-		<!--</goals>-->
-		<!--</execution>-->
-		<!--<execution>-->
-		<!--<id>test-compile</id>-->
-		<!--<phase>test-compile</phase>-->
-		<!--<goals>-->
-		<!--<goal>add-source</goal>-->
-		<!--<goal>testCompile</goal>-->
-		<!--</goals>-->
-		<!--</execution>-->
-		<!--</executions>-->
-		<!--<configuration>-->
-		<!--<recompileMode>incremental</recompileMode>-->
-		<!--<verbose>true</verbose>-->
-		<!--<scalaVersion>${scala.version}</scalaVersion>-->
-		<!--</configuration>-->
-		<!--</plugin>-->
-		<!--</plugins>-->
-		<!--</build>-->
-		<!--<properties>-->
-		<!--&lt;!&ndash; log configuration &ndash;&gt;-->
-		<!--<logback.loglevel>DEBUG</logback.loglevel>-->
-		<!--&lt;!&ndash; default Spring profiles &ndash;&gt;-->
-		<!--<spring.profiles.active>dev,swagger</spring.profiles.active>-->
-		<!--</properties>-->
-		<!--</profile>-->
-		<!--<profile>-->
-		<!--&lt;!&ndash; Profile for monitoring the application with Graphite. &ndash;&gt;-->
-		<!--<id>graphite</id>-->
-		<!--<dependencies>-->
-		<!--<dependency>-->
-		<!--<groupId>io.dropwizard.metrics</groupId>-->
-		<!--<artifactId>metrics-graphite</artifactId>-->
-		<!--</dependency>-->
-		<!--</dependencies>-->
-		<!--</profile>-->
-		<!--<profile>-->
-		<!--&lt;!&ndash; Profile for monitoring the application with Prometheus. &ndash;&gt;-->
-		<!--<id>prometheus</id>-->
-		<!--<dependencies>-->
-		<!--<dependency>-->
-		<!--<groupId>io.prometheus</groupId>-->
-		<!--<artifactId>simpleclient</artifactId>-->
-		<!--<version>${prometheus-simpleclient.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>io.prometheus</groupId>-->
-		<!--<artifactId>simpleclient_servlet</artifactId>-->
-		<!--<version>${prometheus-simpleclient.version}</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>io.prometheus</groupId>-->
-		<!--<artifactId>simpleclient_dropwizard</artifactId>-->
-		<!--<version>${prometheus-simpleclient.version}</version>-->
-		<!--</dependency>-->
-		<!--</dependencies>-->
-		<!--</profile>-->
-		<!--<profile>-->
-		<!--&lt;!&ndash; Profile for applying IDE-specific configuration. At the moment it-->
-		<!--only configures MapStruct, which you need when working with DTOs. &ndash;&gt;-->
-		<!--<id>IDE</id>-->
-		<!--<dependencies>-->
-		<!--<dependency>-->
-		<!--<groupId>org.mapstruct</groupId>-->
-		<!--<artifactId>mapstruct-processor</artifactId>-->
-		<!--<version>${mapstruct.version}</version>-->
-		<!--</dependency>-->
-		<!--</dependencies>-->
-		<!--</profile>-->
 	</profiles>
 
 </project>
