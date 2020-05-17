@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "demo", name = "TEST")
+@Table(name = "TEST")
 @XmlRootElement
 @Data
 public class Test implements Serializable {

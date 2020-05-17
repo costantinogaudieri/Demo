@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "CONFIGURATION_PARAMETERS", schema = "DEMO")
+@Table(name = "CONFIGURATION_PARAMETERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "FUN")
 @Data
