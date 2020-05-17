@@ -19,10 +19,12 @@ public class TestResource {
 
     @GetMapping(value="/hello")
     //@RequestMapping(value="/",method=RequestMethod.GET)
-    public void hello(){
+    public String hello(){
 
         log.debug("start invoke service");
         testService.test();
         log.debug("end invoke service");
+
+        return "res";
     }
 }
